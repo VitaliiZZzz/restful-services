@@ -25,7 +25,7 @@ HTTP - це протокол, що дозволяє виконувати опе�
 
 Для того, щоб з ресурсами виконати CRUD-дії необхідно їх знайти за URI та передати їм вхідні параметри. Для цього використовується запит. Щоб отримати результат CRUD-дій, використовуються відповіді.
 
-![image1](https://github.com/VitaliiZZzz/restful-services-on-restify/blob/master/doc/images/request_response.png)
+![image1](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/images/request_response.png)
 
 Запити та відповіді для зручності будуються за певним шаблоном.
 
@@ -116,4 +116,4 @@ Restify.js - вільне і відкрите програмне забезпе�
 |            | 3. Обмеження частоти запитів (throttling). |  |
 |            | 4. Підтримка SPDY |  |
 
-![image2](https://github.com/VitaliiZZzz/restful-services-on-restify/blob/master/doc/images/json_handings.png)
+![image2](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/images/json_handings.png)
