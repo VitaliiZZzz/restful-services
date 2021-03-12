@@ -116,4 +116,4 @@ Restify.js - вільне і відкрите програмне забезпе�
 |            | 3. Обмеження частоти запитів (throttling). |  |
 |            | 4. Підтримка SPDY |  |
 
-![image2](https://github.com/VitaliiZZzz/restful-services-on-restify/blob/master/doc/images/json_handing.png)
+![image2](https://github.com/VitaliiZZzz/restful-services-on-restify/blob/master/doc/images/json_handings.png)
