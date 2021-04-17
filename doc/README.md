@@ -29,7 +29,9 @@ HTTP - це протокол, що надає можливість віддал�
 * /cars/Mercedes
 * /trucks/MAN/1
 
-Увага! Множина URI (Universal Resource Identifier) включає в себе множини URL (Uniform Resource Locator) та URN (Uniform Resource Name).
+Увага!
+1. Множина URI (Universal Resource Identifier) включає в себе множини URL (Uniform Resource Locator) та URN (Uniform Resource Name).
+2. URI-адреса ніяк не прив'язана до адреси у файловій системі. Наприклад, ресурси з URI "/books", "/KPI/students", "/KPI/students/1" можуть знаходитись в одній і тій же папці "D:\example". В такому контексті URI більше схожа на ключ типу даних String для асоціативного масиву (словника - {key:value}).
 
 ## Запит-відповідь в HTTP
 
@@ -78,7 +80,7 @@ Content-Length: 1234
 * поля заголовка відповіді (header fields)
 * додаткове тіло повідомлення (body)
 
-### Типи HTTP-запиту
+### Типи HTTP-запитів
 
 Тип, який міститься в HTTP-запиті, вказує на необхідну операцію з обраним ресурсом. (Дані типи лише вказують, а не виконують дії)
 ```
@@ -91,6 +93,12 @@ DELETE /movies/1
 * POST: створити новий ресурс (вказує на Create)
 * PUT: оновити існуючий ресурс (вказує на Update)
 * DELETE: видалити ресурс (вказує на Delete)
+
+### Опис якості виконання запиту у HTTP 
+Для опису якості виконання запиту у HTTP протоколі розроблено асоціативний масив {status code: status text}. Код стану (status code) повертається у рядку стану (status line) HTTP-відповіді. Браузер, що зберігає асоціативний масив {status code: status text}, за отриманим кодом виводить "текстовий опис"[https://upload.wikimedia.org/wikipedia/commons/0/09/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D1%96%D0%B2_%D1%81%D1%82%D0%B0%D0%BD%D1%83_HTTP.pdf] стану HTTP-запиту. Веб-сервіс може також використовувати власний текстовий опис стану HTTP-запиту. Наприклад:
+
+
+
 
 ## Порівняння REST-а та HTTP
 
@@ -137,16 +145,23 @@ Restify.js - вільне і відкрите програмне забезпе�
 
 ### Порівняння REST APIs побудованих за допомогою _Express.js_ та _Restify.js_
 
-Фреймворки _Express.js_ та _Restify.js_ мають майже однаковий синтаксис, але різну логіку роботи “під капотом”.
+Фреймворки _Express.js_ та _Restify.js_ мають майже однаковий синтаксис, але різну логіку роботи “під капотом”. Для прикладу будемо використовувати таку "pure-data":
+```
+const books = [
+    {id: 1, name: 'book1'},
+    {id: 2, name: 'book2'},
+    {id: 3, name: 'book3'}
+]
+```
 
 ***Створення сервісу (Application)***
 
-Сервісу прийнято встановлювати ім’я “app”. Для сервісу прийнято вказувати одночасно і динамічний, і статичний порти. Пріоритет надається динамічному порту, але, якщо його немає, то використовується статичний порт.
+Сервісу прийнято встановлювати ім’я “app”. Для сервісу прийнято вказувати одночасно і порт, що задається сервером, і порт, що задається власне сервісом. Пріоритет надається порту, що задається сервером, але, якщо його немає, то використовується порт, що задається сервісом.
 
 _Express.js:_
 ```
 const express = require("express");
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080 // правило вибору порту
 const app = express();
 ```
 
@@ -173,7 +188,7 @@ app.use(logger); // логування
 
 ***Додавання GET кінцевих вершин(GET Endpoints)***
 
-Express.js дозволяє вказувати статус відповіді та надсилати відповідь за допомогою одного конвеєра функцій, а Restify.js – ні.
+Express.js дозволяє вказувати статус відповіді та надсилати відповідь за допомогою одного конвеєра функцій, а Restify.js – ні. Крім того, якщо вказати декілька res.send() підряд, то Express.js виконає один res.send(), проігнорувавши інші, а Restify.js - видасть повідомлення про помилку:
 
 _Express.js:_
 ```
@@ -187,7 +202,7 @@ app.get('/api/books', (req, res) => {
 
 app.get('/api/books/:id', (req, res) => {
     const book = books.find(c => c.id === parseInt(req.params.id));
-    if (!book) res.status(404).send('The book with given id is not found');
+    if (!book) res.status(404).send('The book with given id is not found'); // один конвеєр
     res.send(book);
 });
 ```
@@ -206,7 +221,7 @@ app.get('/api/books/:id', (req, res) => {
 	const book = books.find(b => b.id === parseInt(req.params.id));
 	if (!book) {
 		res.status(404);
-		res.send('The book with given id is not found');
+		res.send('The book with given id is not found'); // без конвеєра
 	}else
 	res.send(book);
 });
@@ -218,7 +233,7 @@ _Express.js:_
 ```
 app.post('/api/books', (req, res) => {
     if (!req.body.name || req.body.name.length < 3) {
-        res.status(400).send("You should give book name")
+        res.status(400).send("You should give book name") // один конвеєр
         return;
     }
     const book = {
@@ -236,7 +251,7 @@ app.post('/api/books', (req, res) => {
 	if (!req.body.name || req.body.name.length < 3){
 		// 400 Bad Request
 		res.status(400);
-		res.send('Name is required and should be minimum characters');
+		res.send('Name is required and should be minimum characters'); // без конвеєра
 		return;
 	}
 	const book = {
@@ -255,7 +270,7 @@ _Express.js:_
 app.put('/api/books/:id', (req, res) => {
     const book = books.find(c => c.id === parseInt(req.params.id));
     if (!book) res.status(404).send('The book with given id is not found');
-    if (!req.body.name) res.status(400).send("You should give book name");
+    if (!req.body.name) res.status(400).send("You should give book name"); // один конвеєр
     book.name = req.body.name;
     res.send(book);
     });
@@ -268,12 +283,12 @@ app.put('/api/books/:id', (req, res) => {
 	if (!book) {
 		res.status(404);
 		res.send('The book with given id is not found');
-		return;
+		return; // вказано для того, щоб не виконувати наступний res.send()
 	};
 	if (!req.body.name){
 		// 400 Bad Request
 		res.status(400);
-		res.send('You should give book name');
+		res.send('You should give book name'); // без конвеєра
 		return;
 	}else{
 		book.name = req.body.name;
@@ -288,7 +303,7 @@ _Express.js:_
 ```
 app.delete('/api/books/:id', (req, res) => {
     const book = books.find(c => c.id === parseInt(req.params.id));
-    if (!book) res.status(404).send('The book with given id is not found');
+    if (!book) res.status(404).send('The book with given id is not found'); // один конвеєр
 
     const index = books.indexOf(book);
     books.splice(index, 1);
@@ -302,7 +317,7 @@ app.del('/api/books/:id', (req, res) => {
 	const book = books.find(b => b.id === parseInt(req.params.id));
 	if (!book) {
 		res.status(404);
-		res.send('The book with given id is not found');
+		res.send('The book with given id is not found'); // без конвеєра
 		return;
 	};
 	const index = books.indexOf(book);
@@ -313,7 +328,7 @@ app.del('/api/books/:id', (req, res) => {
 
 ***Створення роутів (Routes)***
 
-Створення роутів для Express.js відбувається трохи легше, ніж для Restify.js.
+Створення роутів для Express.js відбувається трохи простіше, ніж для Restify.js.
 
 _Express.js:_
 ```
@@ -322,7 +337,7 @@ app
     .get((req, res) => {res.send(books)})
     .post((req, res) => {
     if (!req.body.name || req.body.name.length < 3) {
-        res.status(400).send("You should give book name")
+        res.status(400).send("You should give book name") // один конвейєр
         return;
     }
     const book = {
