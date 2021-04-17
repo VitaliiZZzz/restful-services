@@ -157,7 +157,10 @@ DELETE /movies/1
 * PUT: оновити існуючий ресурс (вказує на Update)
 * DELETE: видалити ресурс (вказує на Delete)
 
-### Опис якості виконання запиту у HTTP 
+### Опис якості виконання запиту у HTTP
+
+Доповідач: Коренюк А.О.
+
 Для опису якості виконання запиту у HTTP протоколі розроблено асоціативний масив {status code: status text}. Код стану (status code) повертається у рядку стану (status line) HTTP-відповіді. Браузер, що зберігає асоціативний масив {status code: status text}, за отриманим кодом виводить [текстовий опис](https://upload.wikimedia.org/wikipedia/commons/0/09/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D1%96%D0%B2_%D1%81%D1%82%D0%B0%D0%BD%D1%83_HTTP.pdf) стану HTTP-запиту. Веб-сервіс може також використовувати власний текстовий опис стану HTTP-запиту. Наприклад:
 
 ![image1](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/images/example404.png)
