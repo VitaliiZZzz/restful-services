@@ -1,8 +1,6 @@
 # RESTful services (express/restify)
 
-[Перейти до практики](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/examples.md)
-
-[Автори доповіді](https://github.com/VitaliiZZzz/restful-services/blob/master/Authors.md)
+[Повернутись на головну](https://github.com/VitaliiZZzz/restful-services/blob/master/README.md)
 
 ## Що таке REST?
 
