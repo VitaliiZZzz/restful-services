@@ -1,6 +1,7 @@
 # RESTful services (express/restify)
 
 [Перейти до теорії](https://github.com/VitaliiZZzz/restful-services/edit/master/doc/theoretics.md)
+
 [Автори доповіді](https://github.com/VitaliiZZzz/restful-services/edit/master/Authors.md)
 
 ### Порівняння REST APIs побудованих за допомогою _Express.js_ та _Restify.js_
