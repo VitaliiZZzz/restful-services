@@ -1,4 +1,4 @@
-# RESTful services (express/restify)
+# RESTful services (based on Express\Restify)
 
 ## Автори доповіді:
 
@@ -6,4 +6,7 @@
 - Коренюк Андрій Олександрович
 
 ## Розділи доповіді:
+
+- [RESTful services. Theoretics](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/theoretics.md)
+- [RESTful services. Examples](https://github.com/VitaliiZZzz/restful-services/blob/master/doc/examples.md)
 
