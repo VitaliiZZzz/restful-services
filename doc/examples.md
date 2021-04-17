@@ -1,4 +1,4 @@
-# RESTful services (express/restify)
+# RESTful services. Examples
 
 [Повернутись на головну](https://github.com/VitaliiZZzz/restful-services/blob/master/README.md)
 
