@@ -8,7 +8,7 @@
 	Код на Restify.js створював: Гутов В.В.
 
 Фреймворки _Express.js_ та _Restify.js_ мають майже однаковий синтаксис, але різну логіку роботи “під капотом”. Для прикладу будемо використовувати таку "pure-data":
-```
+```js
 books = [
     {id: 1, name: 'book1'},
     {id: 2, name: 'book2'},
@@ -21,14 +21,14 @@ books = [
 Змінну, яка зберігатиме об'єкт-сервіс, прийнято називати “app”. Порт, на якому працюватиме сервіс, береться з налаштувань сервера, або вказується безпосередньо в коді.
 
 _Express.js:_
-```
+```js
 const express = require("express");
 const port = process.env.PORT || 8080 // правило вибору порту
 const app = express();
 ```
 
 _Restify.js:_
-```
+```js
 const restify = require('restify');
 const port = process.env.PORT || 8080;
 const app = restify.createServer();
@@ -37,13 +37,13 @@ const app = restify.createServer();
 ***Додавання проміжного обробника (Middleware)***
 
 _Express.js:_
-```
+```js
 app.use(express.json()); // обробник JSON формату в тілі запитів-відповідей
 app.use(logger); // логування
 ```
 
 _Restify.js:_
-```
+```js
 app.use(restify.plugins.bodyParser()); // обробник JSON формату в тілі запитів-відповідей
 app.use(logger); // логування
 ```
@@ -53,7 +53,7 @@ app.use(logger); // логування
 Express.js дозволяє вказувати статус відповіді та надсилати відповідь за допомогою одного конвеєра функцій, а Restify.js – ні. Крім того, якщо вказати декілька res.send() підряд, то Express.js виконає один res.send(), проігнорувавши інші, а Restify.js - видасть повідомлення про помилку:
 
 _Express.js:_
-```
+```js
 app.get('/', (req, res) => {
     res.send("Hello World!");
 });
@@ -70,7 +70,7 @@ app.get('/api/books/:id', (req, res) => {
 ```
 
 _Restify.js:_
-```
+```js
 app.get('/', (req, res) => {
 	res.send('Hello World');
 });
@@ -92,7 +92,7 @@ app.get('/api/books/:id', (req, res) => {
 ***Додавання POST кінцевих вершин(POST Endpoints)***
 
 _Express.js:_
-```
+```js
 app.post('/api/books', (req, res) => {
     if (!req.body.name || req.body.name.length < 3) {
         res.status(400).send("You should give book name") // один конвеєр
@@ -108,7 +108,7 @@ app.post('/api/books', (req, res) => {
 ```
 
 _Restify.js:_
-```
+```js
 app.post('/api/books', (req, res) => {
 	if (!req.body.name || req.body.name.length < 3){
 		// 400 Bad Request
@@ -128,7 +128,7 @@ app.post('/api/books', (req, res) => {
 ***Додавання PUT кінцевих вершин(PUT Endpoints)***
 
 _Express.js:_
-```
+```js
 app.put('/api/books/:id', (req, res) => {
     const book = books.find(c => c.id === parseInt(req.params.id));
     if (!book) res.status(404).send('The book with given id is not found');
@@ -139,7 +139,7 @@ app.put('/api/books/:id', (req, res) => {
 ```
 
 _Restify.js:_
-```
+```js
 app.put('/api/books/:id', (req, res) => {
 	const book = books.find(b => b.id === parseInt(req.params.id));
 	if (!book) {
@@ -162,7 +162,7 @@ app.put('/api/books/:id', (req, res) => {
 ***Додавання DELETE кінцевих вершин(DELETE Endpoints)***
 
 _Express.js:_
-```
+```js
 app.delete('/api/books/:id', (req, res) => {
     const book = books.find(c => c.id === parseInt(req.params.id));
     if (!book) res.status(404).send('The book with given id is not found'); // один конвеєр
@@ -174,7 +174,7 @@ app.delete('/api/books/:id', (req, res) => {
 ```
 
 _Restify.js:_
-```
+```js
 app.del('/api/books/:id', (req, res) => {
 	const book = books.find(b => b.id === parseInt(req.params.id));
 	if (!book) {
@@ -193,7 +193,7 @@ app.del('/api/books/:id', (req, res) => {
 Створення роутів для Express.js відбувається трохи простіше, ніж для Restify.js.
 
 _Express.js:_
-```
+```js
 app
     .route('/api/books')
     .get((req, res) => {res.send(books)})
@@ -211,7 +211,7 @@ app
 ```
 
 _Restify.js:_
-```
+```js
 routerInstance.group('/api/books', function(router){
 	router.get('/', (req, res) => {
 		res.send(books);
@@ -236,12 +236,12 @@ routerInstance.applyRoutes(app);
 ***Запуск сервісу (Listening)***
 
 _Express.js:_
-```
+```js
 app.listen(port, () => console.log(`Listening on port ${port}...`))
 ```
 
 _Restify.js:_
-```
+```js
 app.listen(port, () => {
 	console.log(`Listening port ${port}...`);
 });
