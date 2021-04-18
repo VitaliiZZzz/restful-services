@@ -19,7 +19,7 @@ booksRepresentation = [
 
 Стан (state) – ілюстрація чи опис об’єкта в зафіксований момент часу. Наприклад, конкретні значення атрибутів:
 
-```
+```js
 booksRepresentation = [
     {id: 1, name: 'book1', author: 'author1', year: '2021', pagesCount: 125},
     {id: 2, name: 'book2', author: 'author2', year: '2021', pagesCount: 217},
