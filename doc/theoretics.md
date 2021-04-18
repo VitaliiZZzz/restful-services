@@ -1,7 +1,5 @@
 # RESTful services. Theoretics
 
-[Повернутись на головну](https://github.com/VitaliiZZzz/restful-services/blob/master/README.md)
-
 ## Що таке REST?
 
 Доповідач: Коренюк А.О.
@@ -211,3 +209,10 @@ Restify.js - вільне і відкрите програмне забезпе�
 |            | 4. Підтримка SPDY |  |
 
 ![image2](./images/json_handings.png)
+
+## Матеріал підготували студенти групи ІВ-91:
+
+- Гутов Віталій - [VitaliiZZzz](https://github.com/VitaliiZZzz)
+- Коренюк Андрій - [e-andrew](https://github.com/e-andrew)
+
+https://github.com/VitaliiZZzz/restful-services
