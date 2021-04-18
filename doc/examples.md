@@ -1,7 +1,5 @@
 # RESTful services. Examples
 
-[Повернутись на головну](https://github.com/VitaliiZZzz/restful-services/blob/master/README.md)
-
 ### Порівняння REST APIs побудованих за допомогою _Express.js_ та _Restify.js_
 
 	Код на Express.js створював: Коренюк А.О.
@@ -246,3 +244,10 @@ app.listen(port, () => {
 	console.log(`Listening port ${port}...`);
 });
 ```
+
+## Матеріал підготували студенти групи ІВ-91:
+
+- Гутов Віталій - [VitaliiZZzz](https://github.com/VitaliiZZzz)
+- Коренюк Андрій - [e-andrew](https://github.com/e-andrew)
+
+https://github.com/VitaliiZZzz/restful-services
