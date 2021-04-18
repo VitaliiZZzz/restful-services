@@ -215,4 +215,6 @@ Restify.js - вільне і відкрите програмне забезпе�
 - Гутов Віталій - [VitaliiZZzz](https://github.com/VitaliiZZzz)
 - Коренюк Андрій - [e-andrew](https://github.com/e-andrew)
 
-https://github.com/VitaliiZZzz/restful-services
+## Вихідні файли проектів:
+https://github.com/VitaliiZZzz/restful-service-on-restify
+https://github.com/e-andrew/restful-service-on-express
