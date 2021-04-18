@@ -8,7 +8,7 @@
 
 Представлення (representation) – спосіб ілюстрації чи опису об’єкта. Наприклад, за допомогою атрибутів, за допомогою математичної моделі:
 
-```
+```js
 booksRepresentation = [
     {id: *, name: *, author: *, year: *, pagesCount: *},
     {id: *, name: *, author: *, year: *, pagesCount: *},
